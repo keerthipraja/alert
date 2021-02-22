@@ -1,10 +1,9 @@
 package pages;
 
 import driverBase.Base;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
-import org.openqa.selenium.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
@@ -12,7 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.Properties;
 
 public class DashBoard extends Base {
 
@@ -22,7 +20,7 @@ public class DashBoard extends Base {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(how = How.CSS, using = "#currentBalance.alternateColourFont.boldFont")
+    @FindBy(how = How.CSS, using = "#currentBalance.secondary-colour-text-secondary.boldFont")
     private WebElement rewardsPointsColour;
 
     @FindBy(how = How.LINK_TEXT, using = "View my rewards history")
@@ -40,11 +38,15 @@ public class DashBoard extends Base {
     @FindBy(how = How.CSS, using = "#currentBalanceSection .card-body >p")
     private WebElement dashBoardCardText;
 
-    @FindBy(how = How.LINK_TEXT, using = "About your rewards")
-    private WebElement aboutYourRewardsLink;
+    @FindBy(how = How.LINK_TEXT, using = "About rewards")
+    private WebElement aboutRewardsLink;
 
     @FindBy(how = How.XPATH, using = "//h6[@id ='currentBalance']")
     private WebElement pointsBalance;
+
+    @FindBy(how = How.CSS, using = ".row .col-12 >p")
+    private WebElement nameOfClickedGiftOption;
+
 
     public void pointsColourDashboardPage() throws Exception {
 
@@ -67,22 +69,27 @@ public class DashBoard extends Base {
         verifyTextContained(browserGiftLabel, "Browse Gifts");
     }
 
+    public void decimalPointsNotDisplayed() throws Exception {
+
+        verifyTextNotDisplayed(pointsBalance, ".");
+    }
+
     public void numberOfGiftOptions() throws Exception {
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfAllElements(listOfGiftOptions));
+       // wait.until(ExpectedConditions.visibilityOfAllElements(listOfGiftOptions));
         Assert.assertEquals("Option count error!", listOfGiftOptions.size(), 40);
     }
 
-    public void clickAmazonGiftOption() throws Exception{
+    public void clickAmazonGiftOption() throws Exception {
 
         Thread.sleep(2000);
         listOfGiftOptions.get(0).click();
     }
 
-    public void clickTkMAXXGiftOption() throws Exception{
+    public void clickTkMAXXGiftOption() throws Exception {
 
-       Thread.sleep(2000);
+        Thread.sleep(2000);
         listOfGiftOptions.get(6).click();
     }
 
@@ -110,22 +117,28 @@ public class DashBoard extends Base {
         listOfGiftOptions.get(9).click();
     }
 
-    public void clickAboutYourRewardsLink() throws Exception {
+    public void clickAboutRewardsLink() throws Exception {
 
-        waitForElementToBeVisible(aboutYourRewardsLink);
-        clickUsingJSExecutor(aboutYourRewardsLink);
+        waitForElementToBeVisible(aboutRewardsLink);
+        clickUsingJSExecutor(aboutRewardsLink);
     }
 
     public void pointBalanceDisplayed() throws Exception {
 
         waitForElementToBeVisible(pointsBalance);
-        verifyTextContained(pointsBalance,"pts");
+        verifyTextContained(pointsBalance, "pts");
     }
 
     public void egiftTextDisplayed() throws Exception {
 
         waitForElementToBeVisible(dashBoardCardText);
         verifyTextContained(dashBoardCardText, "You can spend this balance on a variety of eGifts from a wide range of retailers");
+    }
+
+    public void clickMandSGiftCardOption() throws Exception {
+
+        Thread.sleep(2000);
+        listOfGiftOptions.get(16).click();
     }
 
 

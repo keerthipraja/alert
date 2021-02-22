@@ -4,7 +4,7 @@ Feature: This feature file tests the functionality of Dashboard Page on Reward A
     Given User is logged in on Rewards DashBoard page
 
   Scenario: Verify User points colour on Dashboard page
-    Then Points balance colour is bold green on page
+    Then Points balance colour is bold black on page
 
   Scenario: User has option to use Buy Now button
     When User clicks on Amazon Gift option
@@ -15,6 +15,9 @@ Feature: This feature file tests the functionality of Dashboard Page on Reward A
 
   Scenario: User Points balance is displayed
     Then Points balance is displayed
+
+  Scenario: User Points balance does not contain Decimal or "."
+    Then Points balance does not contain Decimal
 
   Scenario: User guide text on eGifts retailers is displayed
     Then eGift user guide text is displayed

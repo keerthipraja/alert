@@ -7,7 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.concurrent.TimeUnit;
 
 public class AboutYourRewards extends Base {
 
@@ -17,7 +16,7 @@ public class AboutYourRewards extends Base {
     }
 
 
-    @FindBy(how = How.XPATH, using = "//h4[contains(text(),'About your rewards')]")
+    @FindBy(how = How.XPATH, using = "//h4[contains(text(),'About rewards')]")
     private WebElement aboutYourRewardsPageLabel;
 
     @FindBy(how = How.CSS, using = ".about")
@@ -31,6 +30,11 @@ public class AboutYourRewards extends Base {
 
     public void versionNumberDisplayed() throws Exception {
 
-        verifyTextContained(aboutPageText, "version:");
+        verifyTextContained(aboutPageText, "Version:");
+    }
+
+    public void copyrightComplianceDisplayed() throws Exception {
+
+        verifyTextContained(aboutPageText, "Copyright © 2020 IMS");
     }
 }

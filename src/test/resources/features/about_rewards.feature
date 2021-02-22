@@ -4,15 +4,19 @@ Feature: This feature file tests the functionality of About Your Rewards Page on
     Given User is logged in on Rewards DashBoard page
 
   Scenario: User clicks About your rewards link on Dashboard page
-    When User clicks on About your rewards Hyperlink
+    When User clicks on About rewards Hyperlink
     Then About your rewards page is displayed
 
   Scenario: Dashboard page displayed when Green Navigation bar is clicked
-    When User clicks on About your rewards Hyperlink
+    When User clicks on About rewards Hyperlink
     And User clicks Green Navigation bar
     Then Dashboard page is displayed
 
   Scenario: Version number of Rewards App is displayed on page
-    When User clicks on About your rewards Hyperlink
+    When User clicks on About rewards Hyperlink
     Then Version Number of Rewards App is displayed
+
+  Scenario: User Text customization is displayed - Copyright
+    When User clicks on About rewards Hyperlink
+    Then Copyright text is displayed
 

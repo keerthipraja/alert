@@ -7,6 +7,11 @@ Feature: This feature file tests the functionality of Rewards Details Page on Re
     When User clicks on Amazon Gift option
     Then Variable denomination slider is displayed
 
+  Scenario: User can use slider to set Maximum GiftCard buy-amount
+    When User clicks on Halfords Gift option
+    And User sets slider to maximum available amount using x and y coordinates
+    Then Variable denomination amount and point is correctly selected
+
   Scenario: User can use slider to set GiftCard buy-amount
     When User clicks on Amazon Gift option
     And User drags slider across to right using x and y coordinates
@@ -97,3 +102,10 @@ Feature: This feature file tests the functionality of Rewards Details Page on Re
     And User clicks Buy Now button
     And User clicks Back to Rewards button
     Then Dashboard page is displayed
+
+  Scenario: User can not redeem Gift option value higher than points balance
+    When User clicks on M and S Gift option
+    And User clicks Buy Now button after selecting maximum value from dropdown
+    Then Not enough points message is displayed
+
+

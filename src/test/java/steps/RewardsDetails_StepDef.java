@@ -3,6 +3,7 @@ package steps;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import net.bytebuddy.implementation.bytecode.Throw;
 import pages.DashBoard;
 import pages.RewardsDetails;
 
@@ -36,13 +37,13 @@ public class RewardsDetails_StepDef {
     @Then("^GiftCard name is displayed on page$")
     public void giftcardNameIsDisplayedOnPage() throws Throwable {
 
-        rewardsDetails.selectedGiftOptionNameDisplayed();
+        rewardsDetails.clickedGiftOptionNameDisplayed();
     }
 
     @Then("^Giftcard image displayed on Rewards details page$")
     public void giftcardImageDisplayedOnRewardsDetailsPage() throws Throwable {
 
-        rewardsDetails.selectedGiftOptionImageDisplayed();
+        rewardsDetails.clickedGiftOptionImageDisplayed();
     }
 
     @Then("^Navigation bar is displayed on Reward Details page$")
@@ -136,13 +137,13 @@ public class RewardsDetails_StepDef {
     }
 
     @And("^Green tick mark displayed along GiftCard image$")
-    public void greenTickMarkDisplayedAlongGiftCardImage() throws Throwable{
+    public void greenTickMarkDisplayedAlongGiftCardImage() throws Throwable {
 
         rewardsDetails.greenTickDisplayed();
     }
 
     @Then("^Selected index value is displayed in dropdown$")
-    public void selectedIndexValueIsDisplayedInDropdown() throws Throwable{
+    public void selectedIndexValueIsDisplayedInDropdown() throws Throwable {
 
         rewardsDetails.selectedValueDisplayed();
     }
@@ -178,7 +179,7 @@ public class RewardsDetails_StepDef {
     }
 
     @And("^User clicks Instructions tab on Rewards Details page$")
-    public void userClicksInstructionsTabOnRewardsDetailsPage() throws Throwable{
+    public void userClicksInstructionsTabOnRewardsDetailsPage() throws Throwable {
 
         rewardsDetails.clickInstructionsTab();
     }
@@ -214,5 +215,29 @@ public class RewardsDetails_StepDef {
         dashBoard.clickCostaGiftCardOption();
     }
 
+    @When("^User clicks on M and S Gift option$")
+    public void user_clicks_on_M_and_S_Gift_option() throws Throwable {
 
+        dashBoard.clickMandSGiftCardOption();
+    }
+
+    @And("^User clicks Buy Now button after selecting maximum value from dropdown$")
+    public void userClicksBuyNowButtonAfterSelectingMaximumValueFromDropdown() throws Throwable {
+
+        rewardsDetails.selectMaximumMandSValueFromDropDown();
+    }
+
+
+    @Then("^Not enough points message is displayed$")
+    public void not_enough_points_message_is_displayed() throws Throwable {
+
+        rewardsDetails.insufficientBalanceMessageDisplayed();
+    }
+
+
+    @And("^User sets slider to maximum available amount using x and y coordinates$")
+    public void userSetsSliderToMaximumAvailableAmountUsingXAndYCoordinates() throws Throwable {
+
+        rewardsDetails.moveSliderToMaximumValue();
+    }
 }

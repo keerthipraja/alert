@@ -14,10 +14,10 @@ public class AboutYourRewards_StepDef {
     AboutYourRewards aboutYourRewards = new AboutYourRewards(driver);
 
 
-    @When("^User clicks on About your rewards Hyperlink$")
-    public void userClicksOnAboutYourRewardsHyperlink() throws Throwable {
+    @When("^User clicks on About rewards Hyperlink$")
+    public void userClicksOnAboutRewardsHyperlink() throws Throwable {
 
-        dashBoard.clickAboutYourRewardsLink();
+        dashBoard.clickAboutRewardsLink();
     }
 
 
@@ -31,5 +31,11 @@ public class AboutYourRewards_StepDef {
     public void versionNumberOfRewardsAppIsDisplayed() throws Throwable{
 
         aboutYourRewards.versionNumberDisplayed();
+    }
+
+    @Then("^Copyright text is displayed$")
+    public void copyright_text_is_displayed() throws Throwable {
+
+        aboutYourRewards.copyrightComplianceDisplayed();
     }
 }

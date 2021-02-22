@@ -33,6 +33,13 @@ public class Base {
         Assert.assertTrue("Error! Element is not displayed!Check UI(HTML) for changes", element.isDisplayed());
     }
 
+    public static void verifyTextNotDisplayed(WebElement element, String text) throws Exception {
+
+        String textValue = element.getText();
+        System.out.println(textValue);
+        Assert.assertFalse("Error! Text is displayed, Typo or Check UI(HTML) for changes", textValue.contains(text));
+    }
+
     public static void actionDragElement(WebElement element, int x, int y) throws Exception {
 
         Actions actions = new Actions(driver);
@@ -63,13 +70,13 @@ public class Base {
     public static void waitForElementToBeVisible(WebElement element) throws Exception {
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOf(element));
+       // wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public static void waitForElementToBeClickable(WebElement element) throws Exception {
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.elementToBeClickable(element));
+        //wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public static void verifyTextContained(WebElement element, String text) throws Exception {
@@ -85,19 +92,12 @@ public class Base {
         select.selectByIndex(index);
     }
 
-//    public static WebElement selectByValue(WebElement element, String value) throws Exception {
-//
-//        select = new Select(element);
-//        select.selectByValue(value);
-//        return element;
-//    }
-
     public static void verifyDifferentValues(String str1, String str2) throws Exception {
 
         Assert.assertNotSame(str1, str2);
     }
 
-    public static void verifySameValuesDsiplayed(String x, String y) throws Exception {
+    public static void verifySameValuesDisplayed(String x, String y) throws Exception {
 
         Assert.assertEquals("Check values on Details page or Typo in method",x,y);
     }

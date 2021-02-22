@@ -1,9 +1,6 @@
 package pages;
 
-import cucumber.runtime.junit.Assertions;
 import driverBase.Base;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +9,6 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.DashBoard;
 
 import java.util.List;
 
@@ -37,7 +33,7 @@ public class RewardsDetails extends Base {
     private WebElement currencyAmountField;
 
     @FindBy(how = How.CSS, using = ".row .col-12 >p")
-    private WebElement selectedGiftOption;
+    private WebElement clickedGiftOption;
 
     @FindBy(how = How.CSS, using = ".card .card-img-top")
     private WebElement selectedGiftOptionImage;
@@ -84,6 +80,12 @@ public class RewardsDetails extends Base {
     @FindBy(how = How.XPATH, using = "//h6[@id ='currentBalance']")
     private WebElement pointsBalance;
 
+    @FindBy(how = How.CSS, using = ".notifyjs-corner")
+    private WebElement balanceInsufficient;
+
+    @FindBy(how = How.CSS, using = "#headerPts")
+    private WebElement pointsValue;
+
 
     public void buyNowButtonDisplayed() throws Exception {
 
@@ -112,7 +114,7 @@ public class RewardsDetails extends Base {
         waitForElementToBeVisible(denominatorSlider);
         denominatorSlider.sendKeys(Keys.ARROW_LEFT);
         String currentAmount = currencyAmountField.getText();
-        verifySameValuesDsiplayed(previousAmount,currentAmount);
+        verifySameValuesDisplayed(previousAmount,currentAmount);
     }
 
     public void minimumAmountSet() throws Exception {
@@ -131,7 +133,17 @@ public class RewardsDetails extends Base {
         waitForElementToBeVisible(backToRewardsButton);
         clickAnElement(backToRewardsButton);
         String currentPointValue = pointsBalance.getText();
+        System.out.println("Point balance before was " + previousPointsValue + " but now lower at " + currentPointValue);
         verifyDifferentValues(previousPointsValue, currentPointValue);
+    }
+
+    public void moveSliderToMaximumValue() throws Exception {
+
+        waitForElementToBeVisible(denominatorSlider);
+        actionDragElement(denominatorSlider, 470, 7);
+        String currentAmount = currencyAmountField.getText();
+        verifyValueEquals("500Points", currentAmount);
+        //500Points is hard coded as this is maximum value slider goes to on Halfords Gift card
     }
 
     public void moveSliderToCoordinate() throws Exception {
@@ -156,22 +168,22 @@ public class RewardsDetails extends Base {
     public void requiredAmountSuccessfullyEntered() throws Exception {
 
         String currentAmount = currencyAmountField.getText();
-        verifyValueEquals(currentAmount, "15Points");
+        verifyValueEquals(currentAmount, "15 Points");
     }
 
     public void currencyAmountSet() throws Exception {
 
         /*The sysout is just because currency comparison can only be done in requiredAmountSuccessfullyEntered() hence condensing */
-        System.out.println("The amount of points spent is: " + currencyAmountField.getText());
+        System.out.println("The amount of points selected is: " + currencyAmountField.getText());
     }
 
-    public void selectedGiftOptionNameDisplayed() throws Exception {
+    public void clickedGiftOptionNameDisplayed() throws Exception {
 
-        waitForElementToBeVisible(selectedGiftOption);
-        verifyElementDisplayed(selectedGiftOption);
+        waitForElementToBeVisible(clickedGiftOption);
+        verifyElementDisplayed(clickedGiftOption);
     }
 
-    public void selectedGiftOptionImageDisplayed() throws Exception {
+    public void clickedGiftOptionImageDisplayed() throws Exception {
 
         waitForElementToBeVisible(selectedGiftOptionImage);
         verifyElementDisplayed(selectedGiftOptionImage);
@@ -281,6 +293,33 @@ public class RewardsDetails extends Base {
 
         waitForElementToBeVisible(termsText);
         verifyTextContained(termsText, "Terms and Conditions");
+    }
+
+    public void selectMaximumMandSValueFromDropDown() throws Exception {
+
+        waitForElementToBeVisible(pointsValue);
+        String points = pointsValue.getText();
+        waitForElementToBeVisible(selectOptionFromDropdown);
+        selectByIndex(selectOptionFromDropdown, 7);
+        String selectedGiftCardValueFromDropdown = selectOptionFromDropdown.getAttribute("value");
+
+        int availablePointValue = Integer.parseInt(points);
+        int maximumGiftCardValueMandS = Integer.parseInt(selectedGiftCardValueFromDropdown);
+
+        if (availablePointValue<maximumGiftCardValueMandS) {
+
+            clickAnElement(buyNowButton);
+        }
+        else
+        {
+            System.out.println("EndUser points is more than Maximum dropdown value so skipping to optimize test env!");
+        }
+    }
+
+    public void insufficientBalanceMessageDisplayed() throws Exception {
+
+        waitForElementToBeVisible(balanceInsufficient);
+        verifyTextContained(balanceInsufficient, "Not enough points to purchase gift");
     }
 
 

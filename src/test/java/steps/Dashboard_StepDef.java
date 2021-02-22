@@ -46,8 +46,8 @@ public class Dashboard_StepDef {
     }
 
 
-    @Then("^Points balance colour is bold green on page$")
-    public void pointsBalanceColourIsBoldGreenOnPage() throws Throwable {
+    @Then("^Points balance colour is bold black on page$")
+    public void pointsBalanceColourIsBoldBlackOnPage() throws Throwable {
 
         dashBoard.pointsColourDashboardPage();
     }
@@ -80,6 +80,12 @@ public class Dashboard_StepDef {
     public void pointsBalanceIsDisplayed() throws Throwable {
 
         dashBoard.pointBalanceDisplayed();
+    }
+
+    @Then("^Points balance does not contain Decimal$")
+    public void points_balance_does_not_contain_Decimal() throws Throwable {
+
+        dashBoard.decimalPointsNotDisplayed();
     }
 
     @Then("^eGift user guide text is displayed$")

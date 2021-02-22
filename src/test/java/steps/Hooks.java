@@ -8,8 +8,9 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+//import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,15 +21,19 @@ public class Hooks extends Base {
 
 
     public Scenario scenario;
+   // static String projectDir = System.getProperty("user.dir");
 
     @Before
     public void startUp() {
-
-        WebDriverManager.chromedriver().setup();
+     //   System.setProperty("webdriver.gecko.driver",projectDir
+     //           + "//Drivers//geckodriver.exe");
+       //        driver=new FirefoxDriver();
+       WebDriverManager.firefoxdriver().setup();
 //        ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--headless");
 //        options.addArguments("--disable-gpu");
-        driver = new ChromeDriver();
+      // driver = new ChromeDriver();
+        driver=new FirefoxDriver();
         driver.manage().deleteAllCookies();
     }
 

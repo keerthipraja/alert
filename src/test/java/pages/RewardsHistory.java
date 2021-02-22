@@ -40,15 +40,12 @@ public class RewardsHistory extends Base {
 
     public void rewardsHistoryPageDisplayed() throws Exception {
 
-
         //Thread.sleep(3000);
         verifyElementDisplayed(rewardsHistoryPageLabel);
     }
 
     public void clickLoadMoreButton() throws Exception {
 
-        /** Multiple clicks as texts being asserted move out of range, hence need to get more results displayed
-         on rewards history page before asserting ***/
         waitForElementToBeVisible(loadMoreButton);
         clickAnElement(loadMoreButton);
         waitForElementToBeVisible(loadMoreButton);
@@ -65,7 +62,7 @@ public class RewardsHistory extends Base {
     public void timeStampDisplayed() throws Exception {
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfAllElements(historyList));
+      //  wait.until(ExpectedConditions.visibilityOfAllElements(historyList));
 
         for (WebElement val : historyList) {
 
@@ -78,7 +75,7 @@ public class RewardsHistory extends Base {
     public void giftClaimedDisplayed() throws Exception {
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfAllElements(historyList));
+       // wait.until(ExpectedConditions.visibilityOfAllElements(historyList));
 
         for (WebElement val : historyList) {
 
@@ -91,7 +88,7 @@ public class RewardsHistory extends Base {
     public void autoBankedPointsDisplayed() throws Exception {
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfAllElements(historyList));
+       // wait.until(ExpectedConditions.visibilityOfAllElements(historyList));
 
         for (WebElement val : historyList) {
 
@@ -104,7 +101,7 @@ public class RewardsHistory extends Base {
     public void pointsAdjustmentsDisplayed() throws Exception {
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOf(ptsDeductions));
+       // wait.until(ExpectedConditions.visibilityOf(ptsDeductions));
         verifyTextContained(ptsDeductions, "pts");
     }
 

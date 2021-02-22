@@ -6,7 +6,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import static driverBase.Base.driver;
 
-import freemarker.log.CommonsLoggingLoggerFactory;
+//import freemarker.log.CommonsLoggingLoggerFactory;
 import pages.DashBoard;
 import pages.Login;
 
